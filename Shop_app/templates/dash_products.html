@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        {% for product in products %}
+        <center>
+            <div class="card" style="width: 25rem; height: 250px">
+                {% comment %} <img src="{{blog.blog_image.url}}" class="card-img-top" alt="{{blog.blog_image}}"> {% endcomment %}
+                <div class="card-body">
+                    <h5 class="card-title">{{product.product_name}}</h5>
+                    <p class="card-text">{{product.product_description}}</p>
+                    <!-- <p class="card-text" style="background-color:red; color: white" >{{product.product_price}} AZN</p> -->
+                    {% comment %} <small>{{product.likes}}</small> {% endcomment %}
+                    <br>
+                    <a href="{% url 'product-detail' product.pk %}" class="btn btn-primary">Detail</a>
+                </div>
+            </div>
+            <br><br>
+        </center>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

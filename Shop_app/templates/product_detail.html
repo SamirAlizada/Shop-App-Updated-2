@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="{% url 'delete-product' product.id %}" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+        <center>
+          <br><br>
+            <img src="{{product.product_image.url}}" style="width:500px;height:500px;" alt="">
+            <h1>{{blog.title}}</h1>
+            <p>{{blog.description}}</p>
+            {% comment %} <p class="card-text" style="background-color:red; color: white" >{{product.product_price}} AZN</p> {% endcomment %}
+            <strong>Published: {{product.author}} -by</strong>
+            <br><br>
+            {% if user.is_authenticated %}
+                <a href="{% url 'update-product' product.id %}" class="btn btn-info">Change</a>
+                <small>-------------------------</small>
+                <a href="{% url 'delete-product' product.pk %}" data-toggle="modal" data-target="#exampleModal" class="btn btn-danger">Delete</a>
+                {% endif %}
+            {% comment %} <small>{{product.likes}}</small> {% endcomment %}
+        </center>
+        <br>
+        <a href="{% url 'index' %}" class="btn btn-secondary">Back</a>
+        <br><br>
+        {% comment %} <form action="{% url 'product-like' product.pk %}" method = "POST">
+            {% csrf_token %}
+            <button type="submit", name='product_id', value="{{product.id}}", class="btn btn-primary btn-sm">Like</button>
+        </form> {% endcomment %}
+    </div>
+
+{% endblock content %}
